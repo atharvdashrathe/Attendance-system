@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClassTrack — Classroom Attendance System</title>
+  <meta name="description" content="Computer vision-powered classroom attendance management system for teachers." />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ======== SIDEBAR ======== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a class="sidebar-logo" href="#" onclick="navigate('dashboard')">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">ClassTrack</div>
+          <div class="sidebar-logo-sub">Attendance System</div>
+        </div>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+
+      <a class="nav-item active" id="nav-dashboard" onclick="navigate('dashboard')">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <div class="nav-section-label">Attendance</div>
+
+      <a class="nav-item" id="nav-take" onclick="navigate('take')">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Take Attendance
+      </a>
+
+      <a class="nav-item" id="nav-history" onclick="navigate('history')">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Attendance History
+      </a>
+
+      <div class="nav-section-label">Settings</div>
+
+      <a class="nav-item" id="nav-subjects" onclick="navigate('subjects')">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+        </svg>
+        Manage Subjects
+      </a>
+
+      <a class="nav-item" id="nav-excel" onclick="navigate('excel')">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Excel Downloads
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div style="font-size:12px; color: hsl(215,15%,50%);">Powered by YuNet + SFace</div>
+    </div>
+  </aside>
+
+  <!-- ======== MAIN ======== -->
+  <div class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <span class="topbar-title" id="topbar-title">Dashboard</span>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-time" id="topbar-clock"></span>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content" id="app-root">
+      <!-- Pages rendered here by JS -->
+      <div class="empty-state">
+        <span class="empty-icon">⏳</span>
+        <div class="empty-title">Loading…</div>
+      </div>
+    </main>
+
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<!-- Toast container -->
+<div id="toast-container"></div>
+
+<!-- Scripts -->
+<script src="/js/app.js"></script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/subjects.js"></script>
+<script src="/js/take_attendance.js"></script>
+<script src="/js/preview.js"></script>
+<script src="/js/history.js"></script>
+<script src="/js/excel_downloads.js"></script>
+
+</body>
+</html>

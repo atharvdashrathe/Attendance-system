@@ -1,0 +1,16 @@
+# ClassTrack — Classroom Attendance System
+# Install with: pip install -r requirements.txt
+
+# Core CV (already installed)
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# Web framework
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# Database
+mysql-connector-python>=8.0.0
+
+# Excel export
+openpyxl>=3.1.0
